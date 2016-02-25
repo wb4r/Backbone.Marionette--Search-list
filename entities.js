@@ -12,7 +12,8 @@ App.Result = Backbone.Model.extend({
 })
 
 App.Results = Backbone.Collection.extend({
-  url: 'https://gist.githubusercontent.com/willemtoledano/422521d16b1ac4317002/raw/44fb415b91e2cb91e15632a52d83dd8d403219f4/cities.json',
+  url: 'https://gist.githubusercontent.com/willemtoledano/c58dfa21901fa0178a42/raw/ad9173677ca38dc9435bf9a51d28231445eed759/cities.json',
+  // url: 'https://gist.githubusercontent.com/willemtoledano/422521d16b1ac4317002/raw/44fb415b91e2cb91e15632a52d83dd8d403219f4/cities.json',
   model: App.Result,
 })
 

@@ -20,7 +20,13 @@
     <script id="js-results" type="text/templates">
       <ul class="suggestions">
         <% _.each(App.FullList.models, function(city){ %>
-          <li><%= city.attributes.city %></li>
+          <li>
+            <%= city.attributes.city %>
+            , <%= city.attributes.state %>
+            <span style="float: right">
+              <%= city.attributes.population %>
+            </span>
+          </li>
         <% }) %>
       </ul>
     </script>
