@@ -6,13 +6,11 @@ App.ResultView = Marionette.ItemView.extend({
 
 App.ResultsView = Marionette.CompositeView.extend({
   tagName: "ul",
-  // className: ".suggestions",
   childView: App.ResultView,
   template: "#js-results",
-  // this.listenTo("show", this.filter()),
 
-  filter: function() {
-    console.log("filtering!!!!!!!!!!!!!!!!!!!!!!!");
+  filter: function(child) {
+    return child.get("selected")
   }
 })
 
@@ -33,26 +31,25 @@ App.InputView = Marionette.ItemView.extend({
         filtered = this.getCollectionMatches(array);
 
     this.changeModelsToSelected(filtered)
-    console.log(App.FullList.where({"selected": true}));
 
-    // var selectionCollection = new App.Results({
-    //   filter: function(model) {
-    //     console.log(model);
-    //   }
-    // })
-    // return child.get('value') % 2 === 0;
-    // this.remove
-    // console.log(selectionCollection);
+    App.FullList.models = _.filter( App.FullList.models, function(model) {
+        if (model.attributes.selected) {
+          return true;
+        } else {
+          return false;
+        }
+    })
 
-    var listview = new App.ResultsView({
-      collection: App.FullList,
-      filter: function(child) {
-        return App.FullList.where({"selected": true})
-      }
-    });
+    var listview = new App.ResultsView({collection: App.FullList});
+
     console.log(listview);
-    // var listview = new App.ResultsView({collection: App.FullList});
+    console.log(App.FullList);
+    console.log(array);
+
+
     App.regions.list.show(listview)
+    App.FullList = new App.Results({})
+    App.FullList.fetch();
   },
   getCollectionMatches: function(array) {
     var search = $("#inputSearch").val();
@@ -72,42 +69,8 @@ App.InputView = Marionette.ItemView.extend({
   },
   allBackToUnselected: function() {
     App.FullList.invoke('set', {"selected": false});
+
   }
 })
 
 var inputview = new App.InputView()
-
-
-//
-// // what user enters
-// var inputText;
-// // the actual value
-// var $inputText = $(".inputText").val();
-//
-// $(".search").on("keyup", function() {
-//   $inputText = $(this).val();
-//   console.log($inputText);
-// })
-//
-
-
-
-
-// var city = App.FullList.get(1);
-//
-// var cityview = new App.ResultView({model: city.attributes})
-//
-// cityview.render()
-//
-// App.regions.list.show(cityview)
-
-// var Message = Backbone.Model.extend();
-// var message = new Message({ title: "Title", description: "Description" });
-// template = '<div><%= message.title %> This is a test</div>'
-// var ItemView = Backbone.Marionette.ItemView.extend({
-//   region: '#main',
-//   template: template,
-//   model: message
-// });
-// var view = new ItemView();
-// view.render();
