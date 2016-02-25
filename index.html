@@ -1,0 +1,53 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <meta charset="utf-8">
+    <title></title>
+    <link rel="stylesheet" href="css.css">
+  </head>
+  <body>
+    <form id="main-container" class="search-form">
+      <input id="inputSearch" type="text" class="search" placeholder="City or State">
+      <!-- <ul class="suggestions">
+        <li class="css-results-li">Filter for a city</li>
+        <li class="css-results-li">or a state</li>
+      </ul> -->
+      <div id="list">
+
+      </div>
+    </form>
+
+    <script id="js-results" type="text/templates">
+      <ul class="suggestions">
+        <% _.each(App.FullList.models, function(city){ %>
+          <li><%= city.attributes.city %></li>
+        <% }) %>
+      </ul>
+    </script>
+
+    <script id="js-result" type="text/template">
+
+    </script>
+
+    <p class="love">Using JavaScript, replicate the <a href="http://wes.io/fAks" target="_blank">functionality found here</a>. <br>I'll post my answer once everyone has had a shot. <br>Tweet your answer <a href="http://twitter.com/wesbos">@wesbos</a></p>
+    <!-- list -->
+    <script src="cities.json"></script>
+
+    <!-- Backbone.js Marionette.js PACK -->
+    <script src="vendor/jquery.js"></script>
+    <script src="vendor/json2.js"></script>
+    <script src="vendor/underscore.js"></script>
+    <script src="vendor/backbone.js"></script>
+    <script src="vendor/backbone.marionette.js"></script>
+    <script src="vendor/backbone.select.js"></script>
+    <!-- App -->
+    <script src="app.js"></script>
+    <script src="entities.js"></script>
+    <script src="views.js"></script>
+
+    <script type="text/javascript">
+      App.start();
+    </script>
+
+  </body>
+</html>
